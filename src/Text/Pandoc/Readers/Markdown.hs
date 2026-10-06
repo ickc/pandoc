@@ -837,7 +837,7 @@ blockQuote = do
     case mbAlert of
       Nothing -> B.blockQuote <$> contents
       Just alert ->
-        (B.divWith ("", ["alert", alert], [])
+        (B.divWith ("", [alert, "alert"], [])
           . (B.divWith ("", ["title"], []) (B.para (B.str (T.toTitle alert))) <>))
            <$> contents
 
@@ -1933,7 +1933,8 @@ bracketedSpan :: PandocMonad m => MarkdownParser m (F Inlines)
 bracketedSpan = do
   guardEnabled Ext_bracketed_spans
   try $ do
-    (lab,_) <- reference
+    guardDisabled Ext_footnotes <|> notFollowedBy' noteMarker
+    lab <- inBalancedBrackets inlines
     attr <- attributes
     return $ wrapSpan attr <$> lab
 

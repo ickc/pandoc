@@ -46,6 +46,7 @@ import qualified Tests.Writers.Markdown
 import qualified Tests.Writers.Ms
 import qualified Tests.Writers.Muse
 import qualified Tests.Writers.Native
+import qualified Tests.Writers.ODT
 import qualified Tests.Writers.Org
 import qualified Tests.Writers.Plain
 import qualified Tests.Writers.Powerpoint
@@ -57,6 +58,7 @@ import qualified Tests.Writers.BBCode
 import qualified Tests.Writers.Txt2Tags
 import qualified Tests.XML
 import qualified Tests.MediaBag
+import qualified Tests.DataDirs
 import Text.Pandoc.Shared (inDirectory)
 
 tests :: FilePath -> TestTree
@@ -65,6 +67,7 @@ tests pandocPath = testGroup "pandoc tests"
         , testGroup "Old" (Tests.Old.tests pandocPath)
         , testGroup "Shared" Tests.Shared.tests
         , testGroup "MediaBag" Tests.MediaBag.tests
+        , testGroup "DataDirs" Tests.DataDirs.tests
         , testGroup "XML" Tests.XML.tests
         , testGroup "ImageSize" Tests.ImageSize.tests
         , testGroup "Writers"
@@ -80,6 +83,7 @@ tests pandocPath = testGroup "pandoc tests"
           , testGroup "Plain" Tests.Writers.Plain.tests
           , testGroup "AsciiDoc" Tests.Writers.AsciiDoc.tests
           , testGroup "Docx" Tests.Writers.Docx.tests
+          , testGroup "ODT" Tests.Writers.ODT.tests
           , testGroup "RST" Tests.Writers.RST.tests
           , testGroup "TEI" Tests.Writers.TEI.tests
           , testGroup "markua" Tests.Writers.Markua.tests
